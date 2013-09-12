@@ -1,0 +1,259 @@
+<html>
+<head>
+<title>${finalName}</title>
+<style type="text/css">
+pre {
+	font-weight: bold;
+	font-family: monospace;
+	color: blue;
+}
+
+h3 {
+	text-decoration: underline;
+}
+
+code {
+	font-weight: bold;
+	font-family: monospace;
+	color: blue;
+}
+</style>
+</head>
+<body>
+	<h3>Table of Contents:</h3>
+
+	<ul>
+		<li><a href="#About">Mailing Lists</a></li>
+		<li><a href="#About">About</a></li>
+		<li><a href="#Introduction">Introduction</a></li>
+		<li><a href="#GettingStarted">Getting Started</a></li>
+		<li><a href="#ValidatingMethods">Validating Methods</a></li>
+		<li><a href="#ValidatingFields">Validating Fields</a></li>
+		<li><a href="#ValidatingParameters">Validating Method
+				Parameters</a></li>
+		<li><a href="#ValidatingTypes">Validating Whole Objects</a></li>
+		<li><a href="#i18n">Internationalization</a></li>
+		<li><a href="#UsingFilters">Using Filters</a></li>
+		<li><a href="#CustomValidators">Writing Your Own Validators</a></li>
+		<li><a href="#Conventions">Conventions</a></li>
+	</ul>
+	<h3 id="About">About</h3>
+
+	<p>
+		This document is a quick start guide to using the Purview Validation
+		API. It should give you everything you need to know about using
+		Purview including writing your own validation annotations. Please send
+		all feedback to <a href="mailto:open@pureperfect.com">open@pureperfect.com.</a>
+		Thank you.
+	</p>
+	<h3 id="Introduction">Introduction</h3>
+	<p>Purview is a simple, lightweight, easily extensible validation
+		API using Java 5 annotations. It provides full support for
+		internationalization (i18n) and interpolation of dynamic values from
+		validation messages using pluggable expression engines.</p>
+	<p>Purview is NOT a JSR 303 implementation and provides several
+		features that JSR 303 does not including:</p>
+	<ul>
+		<li>Lots of already written validators.</li>
+
+		<li>Full support for i18n with dynamic interpolation.</li>
+
+		<li>Rich typing of validation problems instead of simple
+			booleans.</li>
+
+		<li>Not just for JavaBeans: Full support for validating all java
+			language constructs including fields, classes, methods, and method
+			parameters.</li>
+	</ul>
+
+	<p>Purview is also configuration and XML free, supported by over
+		130 unit tests and does not require byte code modification.</p>
+
+	<h3 id="GettingStarted">Getting Started</h3>
+	<p>Getting Started with Purview is easy. This section will show you
+		how to use the built in validation annotations to perform validation
+		on methods, classes, fields, and method parameters.</p>
+	<h3 id="ValidatingMethods">Validating Method Return Values</h3>
+
+	<p>If you want to define validation for the return value of a
+		method do so like this:</p>
+	<pre>
+public class Example { 
+
+	@Email(required=true, reverseLookup=true) 
+	public String getEmail() { .... }
+
+	@MatchMethod("getEmail") 
+	public String getConfirmEmail() { .... } 
+}
+	</pre>
+	<p>
+		The above example contains two validation annotations. The <a
+			href="api/com/pureperfect/purview/validators/net/Email.html">@Email
+			annotation</a> tells the framework that the result of invoking the
+		"getEmail" method should be an email address whose value should not be
+		null and reverse DNS lookup should also be performed in order to
+		validate that the email address belongs to a valid domain. The <a
+			href="api/com/pureperfect/purview/validators/MatchMethod.html">@MatchMethod
+			annotation</a> tells the framework that the "getConfirmEmail" method
+		should return the same result as the "getEmail" method.
+	</p>
+	<p>Now that validation has been defined, you can run validation
+		like this:</p>
+	<pre> ValidationResults results =
+		Purview.validateMethods(myObj, new GetterMethodFilter()); 
+	</pre>
+	<p>
+		The ValidationResults contain information about the validation run
+		including information about any ValidationProblems that might have
+		occurred. Filters allow you to select which methods or fields will be
+		validated. For more information on filters, see <a
+			href="#UsingFilters">Using Filters</a>
+	</p>
+	<h3 id="ValidatingFields">Validating Fields</h3>
+	<pre>
+public class Example2 { 
+
+	@DomainName() 
+	private String domain; 
+	
+	@MatchField("domain")
+	private String confirmDomain; 
+}
+</pre>
+
+	<p>The above example contains two validation annotations. The
+		@DomainName annotation tells the framework that the domain field
+		should have a valid domain name. The @MatchField annotation tells the
+		framework that the "confirmDomain" field should match the domain
+		field.</p>
+
+	<p>Now that validation has been defined, you can run validation
+		like this:</p>
+	<pre>
+ValidationResults results = Purview.validateFields(myObj, new MakeAccessibleFieldFilter()); 
+	</pre>
+	<p>The ValidationResults contain information about the validation
+		run including information about any ValidationProblems that might have
+		occurred.</p>
+
+
+	<h3 id="ValidatingParameters">Validating Method Parameters</h3>
+	<p>You can also attach validation annotations to method parameters
+		like this:</p>
+	<pre>
+public class Example3 {
+	public void theMethod(@LessThan(5) Number id) { ... }
+}
+</pre>
+
+	<p>Now that validation has been defined, you can run validation
+		like this:</p>
+	<pre>
+ValidationResults results = Purview.validateParameters(myObj, theMethod, new Object[]{new Integer(4)}); </pre>
+
+	<h3 id="ValidatingTypes">Validating Whole Objects</h3>
+	<p>You can also define validation for entire object types like
+		this:</p>
+	<pre> 
+@MyCustomValidator
+public class Example4 {
+....
+}</pre>
+	<p>Now that validation has been defined, you can run validation
+		like this:</p>
+
+	<pre>
+ValidationResults awesome = Purview.validateType(Object myObj); </pre>
+	<h3 id="i18n">Internationalization: Providing Rich Messages for
+		Validation Problems</h3>
+
+	<p>You can provide rich messages for validation problems like this:
+	</p>
+
+	<pre>
+ValidationProblem problem = results.getValidationProblems().iterator().next();
+
+problem.getLocalizedMessage(MyResourceBundle); </pre>
+	<p>or</p>
+
+	<code class="block">
+		problem.getLocalizedMessage(MyResourceBundle, MyExpressionEngine); </code>
+	<p>This is a two step process:</p>
+
+	<ol>
+		<li>The ValidationProblem looks for a message in the provided
+			resource bundle. By default, the Fully Qualified Class Name of the
+			ValidationProblem will be used. You can also override the message key
+			by specifying the <code>"messageKey"</code> attribute in your
+			validation annotation. This allows for using the same validation
+			annotation in multiple locations in your application while providing
+			a default value (the problem class name) and still allows for
+			specific messages in a particular usage instance.
+		</li>
+
+		<li>Once the message value is pulled from the resource bundle,
+			the expression engine will parse and populate the value of any
+			expressions in your message using either default ExpressionEngine or
+			the ExpressionEngine that you specify.</li>
+	</ol>
+	<p>Thus the following entry in a ResourceBundle:</p>
+	<code>my.message.key=${problem.getEmail} is not a valid email
+		address.</code>
+
+	<p>becomes this:</p>
+
+	<code>Thebadaddress#foo.com is not a valid email address.</code>
+
+	<h3 id="UsingFilters">Using filters</h3>
+	<p>
+		It is possible to filter which fields or methods are validated using
+		filters. See
+		<code>FieldFilter</code>
+		and
+		<code>MethodFilter</code>
+		for examples.
+	</p>
+
+	<h3 id="CustomValidators">Writing Your Own Validators</h3>
+
+	<p>
+		A validator annotation is an annotation that has a
+		<code>validator</code>
+		attribute. The
+		<code>validator</code>
+		attribute should return an
+		<code>Validator</code>
+		instance. This product is open-source so you can find plenty of
+		examples in the existing code. ;-) It helps to follow the conventions
+		already being used for naming (e.g. allowNull, messageKey) when
+		writing your own annotations. If you write something you think other
+		people will use, consider contributing it back to the project.
+	</p>
+
+	<h3 id="Conventions">Conventions</h3>
+	<ul>
+		<li><b>Strict Mode:</b> Strict mode is a mechanism for checking
+			to make sure that all objects have validation. When validating in
+			strict mode, any value that does not contain a validation annotation
+			or a @NoValidation annotation will raise an exception.</li>
+		<li><b>messageKey:</b> All annotations support a messageKey for
+			overriding the default i18n message key. This allows for a default
+			validation failure message while allowing it to be overridden in
+			specific contexts.</li>
+		<li><b>required:</b> Most validation annotations support the
+			boolean annotation <code>required</code> for indicating whether or
+			not the value is required.</li>
+		<li><b>reverseLookup:</b> Validation annotations in the .net
+			package support the <code>reverseLookup</code> attribute in order to
+			specify whether reverse lookup should be part of the domain
+			validation process. The default value is false.</li>
+		<li><b>validateTlds:</b> Validation annotations in the .net
+			package support the <code>validateTlds</code> attribute.
+			validtlds.lst contains the list of currently known valid top level
+			domains. If validateTlds is set to true, Purview will check the list
+			of valid tlds when attempting to validate network values. The default
+			value is false.</li>
+	</ul>
+</body>
+</html>

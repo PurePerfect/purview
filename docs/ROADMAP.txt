@@ -1,0 +1,18 @@
+Update documentation to provide a list of built-in annotations.
+Performance tuning
+
+Severity Level
+Add default values to all annotations?
+Add trim attribute to text annotations?
+
+com.pureperfect.purview.range (for numeric types)....Python/Groovy .. notation
+
+Additional validation annotations planned:
+
+@Date
+@UPC
+@ISBN
+@XML
+Add IP 6 support to @IPAddress
+
+

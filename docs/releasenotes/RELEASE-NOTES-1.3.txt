@@ -1,0 +1,18 @@
+
+Minor code clean up and testing
+Performance tuning
+Added stateful ValidationEngine interface
+Added non-caching validator factory implementation
+
+Added the following annotations:
+
+@Default
+@Contains
+@NotEmpty
+@True
+@False
+@UpperCase
+@LowerCase
+@Regex
+@AllowOnly(string)
+@AllowOnly(numeric)

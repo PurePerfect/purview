@@ -1,0 +1,14 @@
+The following changes have taken place for the 1.1 release:
+
+Added Strict Validation Mode for fields
+Added Strict Validation Mode for methods
+Added Strict Validation Mode for classes
+Added Strict Validation Mode for parameters
+Extended javadocs
+Extended source-level documentation
+Added "required" boolean attribute to text validators
+Package restructuring
+Extended unit testing
+added optional tld validation for domain
+added optional tld validation for email
+

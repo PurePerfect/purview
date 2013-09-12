@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<profile-report>
+   <profile-case case-class="com.pureperfect.purview.i18n.JEXLExpressionEngineBench">
+   </profile-case>
+   <profile-case case-class="com.pureperfect.purview.i18n.YALEExpressionEngineBench">
+      <profile-scenario scenario-method="eval">
+         <profile-metric key="scenario-timespan" type="SINGLE" value="573.0"/>
+      </profile-scenario>
+   </profile-case>
+</profile-report>

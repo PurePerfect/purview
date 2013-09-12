@@ -1,0 +1,75 @@
+<?xml version="1.0" ?>
+<profile-report-merge>
+   <profile-case case-class="com.pureperfect.purview.i18n.JEXLExpressionEngineBench">
+      <profile-scenario scenario-method="eval">
+         <profile-metric key="scenario-timespan">
+            <metric-value build-name="234" type="SINGLE" value="40.0"/>
+         </profile-metric>
+      </profile-scenario>
+   </profile-case>
+   <profile-case case-class="com.pureperfect.purview.i18n.YALEExpressionEngineBench">
+      <profile-scenario scenario-method="eval">
+         <profile-metric key="scenario-timespan">
+            <metric-value build-name="226" type="SINGLE" value="292.0"/>
+            <metric-value build-name="226" type="SINGLE" value="603.0"/>
+            <metric-value build-name="226" type="SINGLE" value="568.0"/>
+            <metric-value build-name="233" type="SINGLE" value="607.0"/>
+            <metric-value build-name="233" type="SINGLE" value="576.0"/>
+            <metric-value build-name="233" type="SINGLE" value="604.0"/>
+            <metric-value build-name="233" type="SINGLE" value="535.0"/>
+            <metric-value build-name="234" type="SINGLE" value="502.0"/>
+            <metric-value build-name="234" type="SINGLE" value="686.0"/>
+            <metric-value build-name="234" type="SINGLE" value="366.0"/>
+            <metric-value build-name="234" type="SINGLE" value="581.0"/>
+            <metric-value build-name="239" type="SINGLE" value="576.0"/>
+            <metric-value build-name="239" type="SINGLE" value="556.0"/>
+            <metric-value build-name="239" type="SINGLE" value="561.0"/>
+            <metric-value build-name="239" type="SINGLE" value="380.0"/>
+            <metric-value build-name="239" type="SINGLE" value="463.0"/>
+            <metric-value build-name="239" type="SINGLE" value="599.0"/>
+            <metric-value build-name="239" type="SINGLE" value="586.0"/>
+            <metric-value build-name="239" type="SINGLE" value="251.0"/>
+            <metric-value build-name="239" type="SINGLE" value="558.0"/>
+            <metric-value build-name="239" type="SINGLE" value="580.0"/>
+            <metric-value build-name="239" type="SINGLE" value="591.0"/>
+            <metric-value build-name="239" type="SINGLE" value="598.0"/>
+            <metric-value build-name="239" type="SINGLE" value="443.0"/>
+            <metric-value build-name="239" type="SINGLE" value="563.0"/>
+            <metric-value build-name="239" type="SINGLE" value="558.0"/>
+            <metric-value build-name="239" type="SINGLE" value="453.0"/>
+            <metric-value build-name="240" type="SINGLE" value="505.0"/>
+            <metric-value build-name="240" type="SINGLE" value="525.0"/>
+            <metric-value build-name="240" type="SINGLE" value="307.0"/>
+            <metric-value build-name="252" type="SINGLE" value="480.0"/>
+            <metric-value build-name="0" type="SINGLE" value="584.0"/>
+            <metric-value build-name="4" type="SINGLE" value="605.0"/>
+            <metric-value build-name="8" type="SINGLE" value="611.0"/>
+            <metric-value build-name="8" type="SINGLE" value="556.0"/>
+            <metric-value build-name="9" type="SINGLE" value="543.0"/>
+            <metric-value build-name="9" type="SINGLE" value="331.0"/>
+            <metric-value build-name="19" type="SINGLE" value="558.0"/>
+            <metric-value build-name="19" type="SINGLE" value="238.0"/>
+            <metric-value build-name="19" type="SINGLE" value="576.0"/>
+            <metric-value build-name="19" type="SINGLE" value="590.0"/>
+            <metric-value build-name="20" type="SINGLE" value="462.0"/>
+            <metric-value build-name="20" type="SINGLE" value="389.0"/>
+            <metric-value build-name="21" type="SINGLE" value="559.0"/>
+            <metric-value build-name="21" type="SINGLE" value="446.0"/>
+            <metric-value build-name="23" type="SINGLE" value="606.0"/>
+            <metric-value build-name="24" type="SINGLE" value="548.0"/>
+            <metric-value build-name="31" type="SINGLE" value="425.0"/>
+            <metric-value build-name="33" type="SINGLE" value="573.0"/>
+            <metric-value build-name="34" type="SINGLE" value="371.0"/>
+            <metric-value build-name="37" type="SINGLE" value="546.0"/>
+            <metric-value build-name="37" type="SINGLE" value="458.0"/>
+            <metric-value build-name="38" type="SINGLE" value="483.0"/>
+            <metric-value build-name="43" type="SINGLE" value="355.0"/>
+            <metric-value build-name="43" type="SINGLE" value="509.0"/>
+         </profile-metric>
+      </profile-scenario>
+   </profile-case>
+   <profile-case case-class="com.pureperfect.purview.CachingValidatorFactoryBench">
+   </profile-case>
+   <profile-case case-class="com.pureperfect.purview.ValidatorFactoryImplBench">
+   </profile-case>
+</profile-report-merge>
